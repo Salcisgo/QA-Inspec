@@ -1,0 +1,18 @@
+import os
+import sys
+import winshell
+from win32com.client import Dispatch
+
+desktop = winshell.desktop()
+path = os.path.join(desktop, "QA_INSPEC.lnk")
+target = r"C:\Users\mx32009417\AppData\Local\Programs\Python\Python313\pythonw.exe"
+script = r"C:\Scripts\CellInspect.py"
+icon = r"C:\Scripts\CelLogo.ico"  # Cambia por el icono que quieras o elimina esta línea
+
+shell = Dispatch('WScript.Shell')
+shortcut = shell.CreateShortCut(path)
+shortcut.Targetpath = target
+shortcut.Arguments = f'"{script}"'
+shortcut.WorkingDirectory = r"C:\Scripts"
+shortcut.IconLocation = icon  # Puedes comentar esta línea si no tienes icono
+shortcut.save()
